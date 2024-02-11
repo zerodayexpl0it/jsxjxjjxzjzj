@@ -468,7 +468,7 @@ class PrivateRequestMixin:
                 raise ClientNotFoundError(e, response=e.response, **last_json)
             elif e.response.status_code == 408:
                 self.logger.warning("Status 408: Request Timeout")
-                raise   (e, response=e.response, **last_json)
+                raise ClientRequestTimeout(e, response=e.response, **last_json)
             raise ClientError(e, response=e.response, **last_json)
         except requests.ConnectionError as e:
             raise ClientConnectionError("{e.__class__.__name__} {e}".format(e=e))
